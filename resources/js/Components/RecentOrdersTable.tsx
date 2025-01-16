@@ -15,8 +15,13 @@ export default function RecentOrdersTable({
         </h3>
 
         <Button size="sm" asChild>
-          <a href={route('reports.recent-orders')} target="_blank" rel="noreferrer">
+          <a href={`${route('reports.recent-orders')}?format=csv`} target="_blank" rel="noreferrer">
             Export to CSV
+          </a>
+        </Button>
+        <Button size="sm" asChild>
+          <a href={`${route('reports.recent-orders')}?format=pdf`} target="_blank" rel="noreferrer">
+            Export to PDF
           </a>
         </Button>
       </div>

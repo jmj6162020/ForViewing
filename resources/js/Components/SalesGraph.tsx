@@ -85,8 +85,13 @@ export default function SalesGraph({
         </h3>
 
         <Button size="sm" asChild>
-          <a href={exportLink} target="_blank" rel="noreferrer">
+          <a href={`${exportLink}?format=csv`} target="_blank" rel="noreferrer">
             Export to CSV
+          </a>
+        </Button>
+        <Button size="sm" asChild>
+          <a href={`${exportLink}?format=pdf`} target="_blank" rel="noreferrer">
+            Export to PDF
           </a>
         </Button>
       </div>

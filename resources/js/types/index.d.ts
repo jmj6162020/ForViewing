@@ -6,6 +6,7 @@ export interface User {
   campus: string;
   created_at: string;
   role: string;
+  designation: string;
 }
 
 export type PageProps<
@@ -151,6 +152,8 @@ export interface Message {
   contact_number: string;
   message: string;
   read: boolean;
+  created_at: string;
+  formatted_created_at: string;
 }
 
 export interface Customer {

@@ -21,7 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use Searchable;
 
-    protected $appends = ['campus', 'role'];
+    protected $appends = ['campus', 'role', 'designation'];
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +51,11 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->roles()->first()->name;
+    }
+
+    public function getDesignationAttribute()
+    {
+        return $this->attributes['role'];
     }
 
     /**

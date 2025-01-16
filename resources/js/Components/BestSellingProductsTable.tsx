@@ -24,11 +24,20 @@ export default function BestSellingProductsTable({
 
         <Button size="sm" asChild>
           <a
-            href={route('reports.monthly-best-selling')}
+            href={`${route('reports.monthly-best-selling')}?format=csv`}
             target="_blank"
             rel="noreferrer"
           >
             Export to CSV
+          </a>
+        </Button>
+        <Button size="sm" asChild>
+          <a
+            href={`${route('reports.monthly-best-selling')}?format=pdf`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Export to PDF
           </a>
         </Button>
       </div>

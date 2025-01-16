@@ -12,11 +12,15 @@ import {
 import { Button } from '@/Components/ui/button';
 import AppLayout from '@/Layouts/AppLayout';
 import { CartItem } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useId, useState } from 'react';
 import { toast } from 'sonner';
 
 export default function CheckoutPage({ cartItems }: { cartItems: CartItem[] }) {
+  const {
+    auth: { user },
+  } = usePage().props;
+
   const { data, setData, post } = useForm({
     payment_method: 'cash',
   });
@@ -114,30 +118,32 @@ export default function CheckoutPage({ cartItems }: { cartItems: CartItem[] }) {
             <div className="rounded-md bg-white p-4 shadow">
               <h3 className="mb-4 text-lg font-semibold">Payment Options</h3>
 
-              <div className="flex items-center gap-x-3">
-                <input
-                  type="radio"
-                  id="salary_deduction"
-                  name="payment_type"
-                  className="rounded-full border border-gray-300 text-sm text-cobalt-800 shadow-sm"
-                  onClick={() => {
-                    setOpen(true);
-                    setData('payment_method', 'salary_deduction');
-                  }}
-                  checked={data.payment_method === 'salary_deduction'}
-                />
-                <label
-                  htmlFor="salary_deduction"
-                  className="text-nowrap font-medium text-gray-900"
-                >
-                  Salary Deduction (For Employees Only)
-                </label>
+              {user.designation !== 'student' && user.designation !== 'outsider' && (
+                <div className="flex items-center gap-x-3">
+                  <input
+                    type="radio"
+                    id="salary_deduction"
+                    name="payment_type"
+                    className="rounded-full border border-gray-300 text-sm text-cobalt-800 shadow-sm"
+                    onClick={() => {
+                      setOpen(true);
+                      setData('payment_method', 'salary_deduction');
+                    }}
+                    checked={data.payment_method === 'salary_deduction'}
+                  />
+                  <label
+                    htmlFor="salary_deduction"
+                    className="text-nowrap font-medium text-gray-900"
+                  >
+                    Salary Deduction (For Employees Only)
+                  </label>
 
-                <SalaryDeductionDialog
-                  isOpen={isOpen}
-                  closeModal={closeModal}
-                />
-              </div>
+                  <SalaryDeductionDialog
+                    isOpen={isOpen}
+                    closeModal={closeModal}
+                  />
+                </div>
+              )}
 
               <div className="mt-4 flex items-center gap-x-3">
                 <input
